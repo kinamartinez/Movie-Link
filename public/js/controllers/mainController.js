@@ -2,7 +2,6 @@ app.controller('mainController', function($scope, service) {
 
     //'import' functions from service
     $scope.links = service.links;
-    $scope.addMovieLink = service.addMovieLink;
     $scope.addActorLink = service.addActorLink;
     $scope.searchTitle = service.searchTitle;
     $scope.resultByTitle = service.resultByTitle;
@@ -22,6 +21,7 @@ app.controller('mainController', function($scope, service) {
         service.searchTitle($scope.titleMovie);
     };
 
+
     //function for adding movie to links (from search or list)
     $scope.addMovieLink = function (movie) {
         var newMovie = {
@@ -38,10 +38,18 @@ app.controller('mainController', function($scope, service) {
     //test function for ng-click
     $scope.test = function () {
         console.log(this);
+
     };
 
     //Invoke get Popular movies to display when the page opens
     $scope.searchPopular();
+
+    //Variables to show/hide the pages
+    $scope.play = false;
+
+    $scope.playing = function() {
+        $scope.play = true;
+    };
 
 
 });
