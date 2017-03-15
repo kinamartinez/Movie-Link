@@ -33,8 +33,8 @@
             </div>
 
             <!-- render area for movie results-->
-            <div ng-repeat="film in resultByTitle[0] | limitTo:5">
-                <h4><i class="fa fa-film"> </i>  {{film.original_title}} ({{film.release_date | limitTo: 4}})</h4>
+            <div ng-repeat="film in resultByTitle | limitTo:5">
+                <h4><i class="fa fa-film"> </i>  {{film.title}} ({{film.release_date | limitTo: 4}})</h4>
             </div>
 
         </div> <!-- end div for starting movie search-->
@@ -49,23 +49,8 @@
                 <span class="col-md-1"></span>
             </ul>
             <div class="row populars">
-                <h3>Popular Movies</h3>
-                <div ng-repeat="popular in populars[0] | limitTo: 10">
-                    <h5><i class="fa fa-film"></i> {{popular.original_title}}({{popular.release_date}})</h5>
-                </div>
-            </div>
-
-            <div class="row TopRated">
-                <h3>Top Rated Movies</h3>
-                <div ng-repeat="TopMovies in topRated[0] | limitTo: 10">
-                    <h5><i class="fa fa-film"></i> {{TopMovies.original_title}} ({{TopMovies.release_date}}) </h5>
-                </div>
-            </div>
-
-            <div class="row playingMovies">
-                <h3>Now Playing Movies</h3>
-                <div ng-repeat="nowPlaying in nowPlaying[0] | limitTo: 10">
-                    <h5><i class="fa fa-film"></i> {{nowPlaying.original_title}} ({{nowPlaying.release_date}}) </h5>
+                <div ng-repeat="movie in displayRightList | limitTo: 10">
+                    <h4><i class="fa fa-film"></i> {{movie.title}}({{movie.release_date}})</h4>
                 </div>
             </div>
 
