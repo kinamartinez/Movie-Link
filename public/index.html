@@ -33,10 +33,16 @@
             </div>
 
             <!-- render area for movie results-->
+<<<<<<< HEAD
+            <div ng-repeat="film in resultByTitle | limitTo:5"
+                 ng-click="searchCast(this.movie.id)">
+                <h4><i class="fa fa-film"> </i> {{film.title}} ({{film.release_date | limitTo: 4}})</h4>
+=======
 
             <div ng-repeat="film in resultByTitle | limitTo:5">
                 <h4 ng-click="searchCast(this.film.id); addMovieLink(this.film);"><i class="fa fa-film"> </i>  {{film.title}} ({{film.release_date | limitTo: 4}})</h4>
 
+>>>>>>> 866985df635b98f8baa9a52255eb74ce5d5822e0
             </div>
 
         </div> <!-- end div for starting movie search-->
@@ -66,7 +72,7 @@
         <!-- search/display for next movie/actor-->
         <div class="content col-md-6 text-center">
             <h2>Your current link is:<br></h2>
-            <h3>{{links.movies[0].title}} ({{links.movies[0].year}})<br></h3>
+            <h4>{{links.movies}}<br></h4>
             <h2>now search for a movie/actor<br>for the next link:</h2><br>
 
             <!-- search and select for next link-->
@@ -78,19 +84,30 @@
             </div>
             <!-- render area for search results -->
             <!--<div ng-repeat="film in resultByTitle[0] | limitTo:5">-->
-                <!--<h4><i class="fa fa-film"> </i> {{links.movies[0].title}} ({{links.movies[0].year}})</h4>-->
+            <!--<h4><i class="fa fa-film"> </i> {{links.movies[0].title}} ({{links.movies[0].year}})</h4>-->
             <!--</div>-->
 
         </div>
 
         <div class="col-md-6 text-center">
             <h2>Display for links:</h2>
-            <div ng-repeat="movieLinks in links.movies">
-{{movieLinks.title}}({{movieLinks.year}})
+            <div class="content col-md-12 text-center">
+                <div ng-repeat="item in links.movies" class ="content col-md-6">
+                    <p>{{item.title}}</p>
+                </div>
+                <div ng-repeat="itemActors in links.actors" class = "content col-md-6">
+                    <p>{{itemActors.name}}</p>
+                </div>
+
+
+
+
+
                 <!--
                     <chart-form></chart-form>
                     <bar-chart height="500" data="data" hovered="hovered(args)"></bar-chart>
                     -->
+                </div>
             </div>
         </div>
     </div>
