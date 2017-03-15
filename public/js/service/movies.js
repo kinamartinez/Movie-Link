@@ -1,79 +1,6 @@
 app.service('service', function ($http) {
 
-      //movies to be displayed on the graph, based on guesses
-    var movies = [{
-        title: "The Grinch",
-        year: 1990,
-        cast: ["Jim Carrey", "Mumford Mcson"],
-        rating: 10,
-        poster: "someurl"
-
-    }, {
-        title: "The Grinch",
-        year: 1990,
-        cast: ["Jim Carrey", "Mumford Mcson"],
-        rating: 10,
-        poster: "someurl"
-
-    }, {
-        title: "The Grinch",
-        year: 1990,
-        cast: ["Jim Carrey", "Mumford Mcson"],
-        rating: 10,
-        poster: "someurl"
-
-    }, {
-        title: "The Grinch",
-        year: 1990,
-        cast: ["Jim Carrey", "Mumford Mcson"],
-        rating: 10,
-        poster: "someurl"
-
-    }, {
-        title: "The Grinch",
-        year: 1990,
-        cast: ["Jim Carrey", "Mumford Mcson"],
-        rating: 10,
-        poster: "someurl"
-
-    }, {
-        title: "The Grinch",
-        year: 1990,
-        cast: ["Jim Carrey", "Mumford Mcson"],
-        rating: 10,
-        poster: "someurl"
-
-    }, {
-        title: "The Grinch",
-        year: 1990,
-        cast: ["Jim Carrey", "Mumford Mcson"],
-        rating: 10,
-        poster: "someurl"
-
-    }, {
-        title: "The Grinch",
-        year: 1990,
-        cast: ["Jim Carrey", "Mumford Mcson"],
-        rating: 10,
-        poster: "someurl"
-
-    }, {
-        title: "The Grinch",
-        year: 1990,
-        cast: ["Jim Carrey", "Mumford Mcson"],
-        rating: 10,
-        poster: "someurl"
-
-    }, {
-        title: "The Grinch",
-        year: 1990,
-        cast: ["Jim Carrey", "Mumford Mcson"],
-        rating: 10,
-        poster: "someurl"
-
-    }];
-
-    var people = [];
+// search with actor's id to find their *credits*
     var searchPersonId = function (personId) {
         console.log(personId);
         var api_key = "8827ea31eb495768c6d732582c199ecc";
@@ -82,18 +9,22 @@ app.service('service', function ($http) {
             url: "https://api.themoviedb.org/3/person/" + personId + "/movie_credits?api_key=" + api_key
         }).then(function successCallback(response) {
             console.log(response.data.cast);
-            people.push(response.data.cast);
+            credits = response.data.cast;
             console.log(people["0"]["0"]);
-
 
         }, function errorCallback(data) {
             console.log(data.data);
         });
+    };
 
-    }
+//  on actor selection, store their credits to check against next link movie input
+    var credits = [];
 
-
+// on movie selection store the movie's cast to check against next link actor input
     var cast = [];
+
+//after picking a movie from search, hold the cast information to check against
+//next link actor input
     var searchCast = function (movieId) {
         console.log(movieId);
         var api_key = "8827ea31eb495768c6d732582c199ecc";
@@ -101,16 +32,19 @@ app.service('service', function ($http) {
             method: "GET",
             url: "https://api.themoviedb.org/3/movie/" + movieId + "/credits?api_key=" + api_key
         }).then(function successCallback(response) {
-            cast.push(response.data.cast);
+            cast = response.data.cast;
             console.log(cast["0"]);
-
 
         }, function errorCallback(data) {
             console.log(data.data);
         });
 
-    }
-    var popularMovies = [];
+    };
+
+//array for showing beginning movie lists
+    var displayRightList = [];
+
+//function for retrieving popular movies and making display list
     var searchPopular = function () {
         console.log("popular is working");
         var api_key = "8827ea31eb495768c6d732582c199ecc";
@@ -119,14 +53,15 @@ app.service('service', function ($http) {
             url: "https://api.themoviedb.org/3/movie/popular?api_key=" + api_key + "&language=en-US&page=1"
         }).then(function successCallback(response) {
 
-            popularMovies.push(response.data.results);
+            displayRightList = response.data.results;
             console.log(popularMovies["0"]);
 
         }, function errorCallback(data) {
 
         });
     };
-    var topRated = [];
+
+//function for retrieving top rated movies and making display list
     var searchTopRated = function () {
         console.log("topRated is working");
         var api_key = "8827ea31eb495768c6d732582c199ecc";
@@ -135,14 +70,15 @@ app.service('service', function ($http) {
             url: "https://api.themoviedb.org/3/movie/top_rated?api_key=" + api_key + "&language=en-US&page=1"
         }).then(function successCallback(response) {
 
-            topRated.push(response.data.results);
+            displayRightList = response.data.results;
             console.log(topRated["0"]);
 
         }, function errorCallback(data) {
 
         });
     };
-    var nowPlaying = [];
+
+//function for retrieving current movies and making display list
     var searchNowPlaying = function () {
         console.log("NowPlaying is working");
         var api_key = "8827ea31eb495768c6d732582c199ecc";
@@ -151,7 +87,7 @@ app.service('service', function ($http) {
             url: "https://api.themoviedb.org/3/movie/now_playing?api_key=" + api_key + "&language=en-US&page=1"
         }).then(function successCallback(response) {
 
-            nowPlaying.push(response.data.results);
+            displayRightList = response.data.results;
             console.log(nowPlaying["0"]);
 
         }, function errorCallback(data) {
@@ -159,8 +95,10 @@ app.service('service', function ($http) {
         });
     };
 
-
+//array for holding movie search results
     var resultByTitle = [];
+
+//function for finding list of movie's based on user input search
     var searchTitle = function (titleMovie) {
         console.log(titleMovie);
         var api_key = "8827ea31eb495768c6d732582c199ecc";
@@ -169,7 +107,7 @@ app.service('service', function ($http) {
             url: "https://api.themoviedb.org/3/search/movie" + '?query=' + titleMovie + '&api_key=' + api_key
         }).then(function successCallback(response) {
 
-            resultByTitle.push(response.data.results);
+            resultByTitle = response.data.results;
             console.log(resultByTitle["0"]);
 
         }, function errorCallback(data) {
@@ -177,12 +115,41 @@ app.service('service', function ($http) {
         });
     };
 
-    var guesses = [];
-    var addToGuess = function (movie) {
-        guesses.push(movie)
+//object and array for shoing user's movie and actor links
+    var links = {
+        movies: [
+        {
+        title: "The Grinch",
+        year: 1990,
+        cast: ["Jim Carrey", "Mumford Mcson"],
+        rating: 10,
+        poster: "someurl"
+        },
+        {
+        title: "The Grinch 2",
+        year: 1990,
+        cast: ["Jim Carrey", "Mumford Mcson"],
+        rating: 10,
+        poster: "someurl"
+        }
+        ],
+        actors:[
+        "Elijah Wood", "Tom Hanks", "Bill Cosby"
+        ]
     };
 
-    var actors = [];
+//function for adding specific movie to links obj
+    var addMovieLink = function (movie) {
+        links.movies.push(movie);
+    };
+
+//function for adding specific actor to links obj
+    var addActorLink = function (actor) {
+        links.actors.push(actor);
+    };
+
+//array for listing results of general actor search
+    var resultByActor = [];
     var searchActor = function (actorName) {
         var api_key = "8827ea31eb495768c6d732582c199ecc";
         $http({
@@ -190,7 +157,7 @@ app.service('service', function ($http) {
             url: "https://api.themoviedb.org/3/search/person?api_key="+ api_key +"&language=en-US&query="+actorName+"&page=1&include_adult=false"
         }).then(function successCallback(response) {
 
-            actors.push(response.data.results);
+            resultsByActor = response.data.results;
             console.log(actors["0"]);
 
         }, function errorCallback(data) {
@@ -200,25 +167,22 @@ app.service('service', function ($http) {
 
     //exporting functions to the controller
     return {
-        movies: movies,
-        popularMovies: popularMovies,
-        // searchActor: searchActor,
-        //results: results,
+
+        links: links,
+        addMovieLink: addMovieLink,
+        addActorLink: addActorLink,
         searchTitle: searchTitle,
         resultByTitle: resultByTitle,
-        guesses: guesses,
-        addToGuess: addToGuess,
         searchCast: searchCast,
         cast: cast,
-        people: people,
+        credits: credits,
         searchPersonId: searchPersonId,
         searchPopular: searchPopular,
-        topRated: topRated,
         searchTopRated: searchTopRated,
-        nowPlaying: nowPlaying,
         searchNowPlaying: searchNowPlaying,
-        actors:actors,
+        resultByActor: resultByActor,
         searchActor:searchActor,
+        displayRightList: displayRightList
 
     };
 });
