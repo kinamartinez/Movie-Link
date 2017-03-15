@@ -36,7 +36,7 @@
 
             <!-- render area for movie results-->
             <div ng-repeat="film in resultByTitle | limitTo:5">
-                <h4 ng-click="searchCast(this.film.id); addMovieLink(this.film); playing();"><i class="fa fa-film"> </i>  {{film.title}} ({{film.release_date | limitTo: 4}})</h4>
+                <h4 ng-click="searchCast(this.film.id); addMovieLink(this.film); playing(); clearMovieInput();"><i class="fa fa-film"> </i>  {{film.title}} ({{film.release_date | limitTo: 4}})</h4>
             </div>
 
         </div> <!-- end div for starting movie search-->
@@ -66,41 +66,41 @@
 
         <!-- search/display for next actor-->
         <div class="content col-md-6 text-center">
-            <!-- this text will show if the user now need to guess actor-->
+            
+            <!-- show for actor search -->
             <div ng-show="nextActor">
                 <h2>Your current link is:<br></h2>
                 <h4>{{links.movies[links.movies.length-1].title}} ({{links.movies[links.movies.length-1].year | limitTo: 4}})<br></h4>
                 <h2>now search for a cast member<br>for the next link:</h2><br>
+            <!-- input for actor search-->
+                <div class="input-group">
+                    <input type="text" ng-model="actorName" class="form-control" placeholder="Actor or actress">
+                    <span class="input-group-btn">
+                     <button class="btn btn-default" ng-click="searchActor(actorName)" type="button">Search</button>
+                    </span>
+                </div>
+            <!-- display searches -->
+                <div ng-repeat="actor in resultByActor | limitTo:5">
+                    <h4 ng-click="searchPersonId(this.actor.id); addActorLink(this.actor); toggleMovieActor(); clearActorInput();"><i class="fa fa-user"> </i>   {{actor.name}}</h4>
+                </div>
             </div>
 
-            <!-- this text will show if the user now need to guess movie-->
+            <!-- this will show if the user now need to guess movie-->
             <div ng-show="nextMovie">
                 <h2>Your current link is:<br></h2>
-                <h4>{{links.actors[links.actors.length-1]}} <br></h4>
+                <h4>{{links.actors[links.actors.length-1].name}} <br></h4>
                 <h2>now search for another credit<br>for the next link:</h2><br>
-            </div>
-
-
-            <!-- search and select for next actor link-->
-            <div class="input-group" ng-show="nextActor">
-                <input type="text" ng-model="actorName" class="form-control" placeholder="Movie name or actor">
-                <span class="input-group-btn">
-                     <button class="btn btn-default" ng-click="searchActor(actorName)" type="button">Search</button>
-                </span>
-            </div>
-
-            <!-- search and select for next movie link-->
-            <div class="input-group" ng-show="nextMovie">
-                <input type="text" class="form-control" ng-model="titleMovie" placeholder="Movie title">
-                <span class="input-group-btn">
+                <!-- search and select for next movie link-->
+                <div class="input-group">
+                    <input type="text" class="form-control" ng-model="titleMovie" placeholder="Movie title">
+                    <span class="input-group-btn">
                     <button class="btn btn-default" ng-click="searchTitle(titleMovie)" type="button">Search</button>
                     </span>
+                </div>
+                <div ng-repeat="film in resultByTitle | limitTo:5">
+                    <h4 ng-click="searchCast(this.film.id); addMovieLink(this.film); toggleMovieActor(); clearMovieInput()"><i class="fa fa-film"> </i>  {{film.title}} ({{film.release_date | limitTo: 4}})</h4>
+                </div>
             </div>
-
-            <!-- render area for search results -->
-            <!--<div ng-repeat="film in resultByTitle[0] | limitTo:5">-->
-            <!--<h4><i class="fa fa-film"> </i> {{links.movies[0].title}} ({{links.movies[0].year}})</h4>-->
-            <!--</div>-->
 
             <!-- test button for toggling actor/movie-->
             <button class="btn btn-default" ng-click="toggleMovieActor()" type="button">toggle test</button>

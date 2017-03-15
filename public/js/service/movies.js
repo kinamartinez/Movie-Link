@@ -41,14 +41,14 @@ app.service('service', function($http) {
 
     //function for retrieving results of user input to find actor
     var searchActor = function(actorName) {
+        console.log(actorName);
         var api_key = "8827ea31eb495768c6d732582c199ecc";
         $http({
             method: "GET",
             url: "https://api.themoviedb.org/3/search/person?api_key=" + api_key + "&language=en-US&query=" + actorName + "&page=1&include_adult=false"
         }).then(function successCallback(response) {
-            angular.copy(response.data.results, resultsByActor);
-            resultsByActor = response.data.results;
-
+            angular.copy(response.data.results, resultByActor);
+            console.log(resultByActor);
         }, function errorCallback(data) {
 
         });
@@ -66,7 +66,6 @@ app.service('service', function($http) {
             url: "https://api.themoviedb.org/3/person/" + personId + "/movie_credits?api_key=" + api_key
         }).then(function successCallback(response) {
             console.log(response.data.cast);
-            credits = response.data.cast;
             angular.copy(response.data.cast, credits);
 
         }, function errorCallback(data) {
@@ -132,22 +131,8 @@ app.service('service', function($http) {
     //LINKS
     //object and array for showing user's movie and actor links/selections
     var links = {
-        movies: [{
-            title: "The Grinch",
-            year: 1990,
-            cast: ["Jim Carrey", "Mumford Mcson"],
-            rating: 10,
-            poster: "someurl"
-        }, {
-            title: "The Grinch 2",
-            year: 1990,
-            cast: ["Jim Carrey", "Mumford Mcson"],
-            rating: 10,
-            poster: "someurl"
-        }],
-        actors: [
-            "Elijah Wood", "Tom Hanks", "Bill Cosby"
-        ]
+        movies: [],
+        actors: []
     };
 
     //function for adding specific movie to links obj
