@@ -20,6 +20,10 @@ app.controller('mainController', function($scope, service) {
         service.searchTitle($scope.titleMovie);
     };
 
+    $scope.test = function () {
+        console.log(this.movie.id);
+    };
+
     //Invoke get Popular movies to display when the page opens
     $scope.searchPopular();
 
