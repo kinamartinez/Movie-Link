@@ -28,9 +28,8 @@ app.service('service', function($http) {
             method: "GET",
             url: "https://api.themoviedb.org/3/movie/" + movieId + "/credits?api_key=" + api_key
         }).then(function successCallback(response) {
-            cast = response.data.cast;
             angular.copy(response.data.cast, cast);
-
+            console.log(cast);
         }, function errorCallback(data) {
             console.log(data.data);
         });
@@ -154,6 +153,7 @@ app.service('service', function($http) {
     //function for adding specific movie to links obj
     var addMovieLink = function(movie) {
         links.movies.push(movie);
+        console.log(links.movies);
     };
 
     //function for adding specific actor to links obj
