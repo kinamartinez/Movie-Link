@@ -16,6 +16,9 @@ app.controller('mainController', function($scope, service) {
     $scope.resultByActor = service.resultByActor;
     $scope.searchActor = service.searchActor;
     $scope.displayRightList = service.displayRightList;
+    $scope.searchTitle = function() {
+        service.searchTitle($scope.titleMovie);
+    };
 
     //Invoke get Popular movies to display when the page opens
     $scope.searchPopular();
