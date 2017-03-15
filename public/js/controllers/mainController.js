@@ -35,6 +35,17 @@ app.controller('mainController', function($scope, service) {
         service.addMovieLink(newMovie);
     };
 
+    $scope.addActorLink = function (actor) {
+
+        newActor = {
+            name: actor.name,
+            id: actor.id,
+            img: "http://image.tmdb.org/t/p/w154"+actor.profile_path
+        };
+        console.log(newActor);
+        service.addActorLink(newActor)
+    };
+
     //test function for ng-click
     $scope.test = function () {
         console.log(this);
@@ -60,5 +71,14 @@ app.controller('mainController', function($scope, service) {
         $scope.nextMovie = !$scope.nextMovie;
     };
 
+    $scope.clearMovieInput = function () {
+        $scope.movieTitle = "";
+        $scope.resultByTitle = [];
+    };
+
+    $scope.clearActorInput = function () {
+        $scope.actorName = "";
+        $scope.resultByActor = [];
+    }
 
 });
