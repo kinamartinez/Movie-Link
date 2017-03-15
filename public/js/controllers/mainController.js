@@ -50,6 +50,15 @@ app.controller('mainController', function($scope, service) {
     $scope.playing = function() {
         $scope.play = true;
     };
+    //vars to toggle actor/movie search
+    $scope.nextActor = true;
+
+    $scope.nextMovie = false;
+
+    $scope.toggleMovieActor = function () {
+        $scope.nextActor = !$scope.nextActor;
+        $scope.nextMovie = !$scope.nextMovie;
+    };
 
 
 });
