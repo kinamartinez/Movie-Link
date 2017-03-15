@@ -34,7 +34,7 @@
 
             <!-- render area for movie results-->
             <div ng-repeat="film in resultByTitle | limitTo:5">
-                <h4 ng-click="searchCast(this.movie.id)"><i class="fa fa-film"> </i>  {{film.title}} ({{film.release_date | limitTo: 4}})</h4>
+                <h4 ng-click="searchCast(this.film.id)"><i class="fa fa-film"> </i>  {{film.title}} ({{film.release_date | limitTo: 4}})</h4>
             </div>
 
         </div> <!-- end div for starting movie search-->

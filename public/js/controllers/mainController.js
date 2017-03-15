@@ -16,12 +16,17 @@ app.controller('mainController', function($scope, service) {
     $scope.resultByActor = service.resultByActor;
     $scope.searchActor = service.searchActor;
     $scope.displayRightList = service.displayRightList;
+    
+    //function for finding movie from input
     $scope.searchTitle = function() {
         service.searchTitle($scope.titleMovie);
     };
 
-    $scope.test = function() {
-        console.log(this.movie.id);
+
+    //test function for ng-click
+    $scope.test = function () {
+        console.log(this);
+
     };
 
     //Invoke get Popular movies to display when the page opens
