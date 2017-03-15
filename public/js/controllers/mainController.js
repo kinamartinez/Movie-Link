@@ -22,13 +22,22 @@ app.controller('mainController', function($scope, service) {
         service.searchTitle($scope.titleMovie);
     };
 
+
     //test function for ng-click
     $scope.test = function () {
         console.log(this);
+
     };
 
     //Invoke get Popular movies to display when the page opens
     $scope.searchPopular();
+
+    //Variables to show/hide the pages
+    $scope.play = false;
+
+    $scope.playing = function() {
+        $scope.play = true;
+    };
 
 
 });
