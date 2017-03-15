@@ -2,7 +2,6 @@ app.controller('mainController', function($scope, service) {
 
     //'import' functions from service
     $scope.links = service.links;
-    $scope.addMovieLink = service.addMovieLink;
     $scope.addActorLink = service.addActorLink;
     $scope.searchTitle = service.searchTitle;
     $scope.resultByTitle = service.resultByTitle;
@@ -22,6 +21,19 @@ app.controller('mainController', function($scope, service) {
         service.searchTitle($scope.titleMovie);
     };
 
+
+    //function for adding movie to links (from search or list)
+    $scope.addMovieLink = function (movie) {
+        var newMovie = {
+            title: movie.title,
+            year: movie.release_date,
+            id: movie.id,
+            rating: movie.vote_average,
+            img: "http://image.tmdb.org/t/p/w154"+movie.backdrop_path
+        };
+        console.log(newMovie);
+        service.addMovieLink(newMovie);
+    };
 
     //test function for ng-click
     $scope.test = function () {

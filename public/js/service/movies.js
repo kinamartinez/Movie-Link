@@ -153,6 +153,7 @@ app.service('service', function($http) {
     //function for adding specific movie to links obj
     var addMovieLink = function(movie) {
         links.movies.push(movie);
+        console.log(links.movies);
     };
 
     //function for adding specific actor to links obj
