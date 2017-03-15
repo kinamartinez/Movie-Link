@@ -20,12 +20,19 @@ app.controller('mainController', function($scope, service) {
         service.searchTitle($scope.titleMovie);
     };
 
-    $scope.test = function () {
+    $scope.test = function() {
         console.log(this.movie.id);
     };
 
     //Invoke get Popular movies to display when the page opens
     $scope.searchPopular();
+
+    //Variables to show/hide the pages
+    $scope.play = false;
+
+    $scope.playing = function() {
+        $scope.play = true;
+    };
 
 
 });
