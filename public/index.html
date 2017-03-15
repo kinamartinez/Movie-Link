@@ -13,10 +13,12 @@
 
 
 <body ng-controller="mainController">
-
+<header>
+<h1> Movie Links<br> </h1>
+</header>
 <section class="container"> <!--container for all -->
 
-    <div class="row text-center"> <!--welcome div-->
+    <div class="row text-center area" ng-hide="play"> <!--welcome div-->
 
         <div class="content col-md-6"> <!-- div for starting movie search-->
 
@@ -33,16 +35,8 @@
             </div>
 
             <!-- render area for movie results-->
-<<<<<<< HEAD
-            <div ng-repeat="film in resultByTitle | limitTo:5"
-                 ng-click="searchCast(this.movie.id)">
-                <h4><i class="fa fa-film"> </i> {{film.title}} ({{film.release_date | limitTo: 4}})</h4>
-=======
-
             <div ng-repeat="film in resultByTitle | limitTo:5">
-                <h4 ng-click="searchCast(this.film.id); addMovieLink(this.film);"><i class="fa fa-film"> </i>  {{film.title}} ({{film.release_date | limitTo: 4}})</h4>
-
->>>>>>> 866985df635b98f8baa9a52255eb74ce5d5822e0
+                <h4 ng-click="searchCast(this.film.id); addMovieLink(this.film); playing();"><i class="fa fa-film"> </i>  {{film.title}} ({{film.release_date | limitTo: 4}})</h4>
             </div>
 
         </div> <!-- end div for starting movie search-->
@@ -57,37 +51,62 @@
                 <span class="col-md-1"></span>
             </ul>
             <div class="row populars">
+            <br><br><br><br>
                 <div ng-repeat="movie in displayRightList | limitTo: 10">
-                    <h4 ng-click="searchCast(this.movie.id); addMovieLink(this.movie);"><i class="fa fa-film"></i> {{movie.title}}({{movie.release_date | limitTo: 4}})</h4>
+                    <h4 ng-click="searchCast(this.movie.id); addMovieLink(this.movie); playing();"><i class="fa fa-film"></i> {{movie.title}}({{movie.release_date | limitTo: 4}})</h4>
                 </div>
             </div>
-
+           <button class="btn btn-default" ng-click="playing()" type="button">playing test</button>
         </div> <!-- end of display for movie lists-->
 
     </div> <!-- end of welcome section-->
 
     <!-- "play" section -->
-    <div class="row">
+    <div class="row area" ng-show="play">
 
-        <!-- search/display for next movie/actor-->
+        <!-- search/display for next actor-->
         <div class="content col-md-6 text-center">
-            <h2>Your current link is:<br></h2>
-            <h4>{{links.movies}}<br></h4>
-            <h2>now search for a movie/actor<br>for the next link:</h2><br>
+            <!-- this text will show if the user now need to guess actor-->
+            <div ng-show="nextActor">
+                <h2>Your current link is:<br></h2>
+                <h4>{{links.movies[links.movies.length-1].title}} ({{links.movies[links.movies.length-1].year | limitTo: 4}})<br></h4>
+                <h2>now search for a cast member<br>for the next link:</h2><br>
+            </div>
 
-            <!-- search and select for next link-->
-            <div class="input-group">
+            <!-- this text will show if the user now need to guess movie-->
+            <div ng-show="nextMovie">
+                <h2>Your current link is:<br></h2>
+                <h4>{{links.actors[links.actors.length-1]}} <br></h4>
+                <h2>now search for another credit<br>for the next link:</h2><br>
+            </div>
+
+
+            <!-- search and select for next actor link-->
+            <div class="input-group" ng-show="nextActor">
                 <input type="text" ng-model="actorName" class="form-control" placeholder="Movie name or actor">
                 <span class="input-group-btn">
                      <button class="btn btn-default" ng-click="searchActor(actorName)" type="button">Search</button>
+                </span>
+            </div>
+
+            <!-- search and select for next movie link-->
+            <div class="input-group" ng-show="nextMovie">
+                <input type="text" class="form-control" ng-model="titleMovie" placeholder="Movie title">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" ng-click="searchTitle(titleMovie)" type="button">Search</button>
                     </span>
             </div>
+
             <!-- render area for search results -->
             <!--<div ng-repeat="film in resultByTitle[0] | limitTo:5">-->
             <!--<h4><i class="fa fa-film"> </i> {{links.movies[0].title}} ({{links.movies[0].year}})</h4>-->
             <!--</div>-->
 
+            <!-- test button for toggling actor/movie-->
+            <button class="btn btn-default" ng-click="toggleMovieActor()" type="button">toggle test</button>
         </div>
+
+
 
         <div class="col-md-6 text-center">
             <h2>Display for links:</h2>
@@ -97,16 +116,6 @@
                 </div>
                 <div ng-repeat="itemActors in links.actors" class = "content col-md-6">
                     <p>{{itemActors.name}}</p>
-                </div>
-
-
-
-
-
-                <!--
-                    <chart-form></chart-form>
-                    <bar-chart height="500" data="data" hovered="hovered(args)"></bar-chart>
-                    -->
                 </div>
             </div>
         </div>
