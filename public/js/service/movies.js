@@ -8,8 +8,7 @@ app.service('service', function($http) {
             method: "GET",
             url: "https://api.themoviedb.org/3/search/movie" + '?query=' + titleMovie + '&api_key=' + api_key
         }).then(function successCallback(response) {
-
-            resultByTitle = response.data.results;
+            angular.copy(response.data.results, resultByTitle);
             console.log(resultByTitle["0"]);
 
         }, function errorCallback(data) {
@@ -30,6 +29,7 @@ app.service('service', function($http) {
             url: "https://api.themoviedb.org/3/movie/" + movieId + "/credits?api_key=" + api_key
         }).then(function successCallback(response) {
             cast = response.data.cast;
+            angular.copy(response.data.cast, cast);
 
         }, function errorCallback(data) {
             console.log(data.data);
@@ -47,6 +47,7 @@ app.service('service', function($http) {
             method: "GET",
             url: "https://api.themoviedb.org/3/search/person?api_key=" + api_key + "&language=en-US&query=" + actorName + "&page=1&include_adult=false"
         }).then(function successCallback(response) {
+            angular.copy(response.data.results, resultsByActor);
             resultsByActor = response.data.results;
 
         }, function errorCallback(data) {
@@ -67,6 +68,7 @@ app.service('service', function($http) {
         }).then(function successCallback(response) {
             console.log(response.data.cast);
             credits = response.data.cast;
+            angular.copy(response.data.cast, credits);
 
         }, function errorCallback(data) {
             console.log(data.data);
@@ -86,8 +88,8 @@ app.service('service', function($http) {
             method: "GET",
             url: "https://api.themoviedb.org/3/movie/popular?api_key=" + api_key + "&language=en-US&page=1"
         }).then(function successCallback(response) {
-            console.log(response.data.results[0]);
-            displayRightList = response.data.results;
+            console.log(response.data.results);
+            angular.copy(response.data.results, displayRightList);
 
         }, function errorCallback(data) {
 
@@ -102,8 +104,8 @@ app.service('service', function($http) {
             method: "GET",
             url: "https://api.themoviedb.org/3/movie/top_rated?api_key=" + api_key + "&language=en-US&page=1"
         }).then(function successCallback(response) {
-            console.log(response.data.results[0]);
-            displayRightList = response.data.results;
+            console.log(response.data.results);
+            angular.copy(response.data.results, displayRightList);
         }, function errorCallback(data) {
 
         });
@@ -117,7 +119,7 @@ app.service('service', function($http) {
             url: "https://api.themoviedb.org/3/movie/now_playing?api_key=" + api_key + "&language=en-US&page=1"
         }).then(function successCallback(response) {
             console.log(response.data.results[0]);
-            displayRightList = response.data.results;
+            angular.copy(response.data.results, displayRightList);
 
         }, function errorCallback(data) {
 
