@@ -29,6 +29,7 @@ app.service('service', function($http) {
             url: "https://api.themoviedb.org/3/movie/" + movieId + "/credits?api_key=" + api_key
         }).then(function successCallback(response) {
             angular.copy(response.data.cast, cast);
+            console.log(cast);
         }, function errorCallback(data) {
             console.log(data.data);
         });
