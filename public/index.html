@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html ng-app="MovieLink">
+
+<head>
+    <!-- *reminder to put dependency links* -->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css"
+          href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>MovieLink</title>
+</head>
+
+
+<body ng-controller="mainController">
+
+<section class="container"> <!--container for all -->
+
+    <div class="row text-center"> <!--welcome div-->
+
+        <div class="content col-md-6"> <!-- div for starting movie search-->
+
+            <!--intro text-->
+            <h2>Welcome,<br><br>please search a movie title,<br>or select movie on right,<br>to create first link:</h2>
+            <br><br>
+
+            <!-- search and input  -->
+            <div class="input-group">
+                <input type="text" class="form-control" ng-model="titleMovie" placeholder="Movie title">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" ng-click="searchTitle()" type="button">Search</button>
+                    </span>
+            </div>
+
+            <!-- render area for movie results-->
+            <div ng-repeat="film in resultByTitle[0] | limitTo:5">
+                <h4><i class="fa fa-film"> </i>  {{film.title}} ({{film.release_date | limitTo: 4}})</h4>
+            </div>
+
+        </div> <!-- end div for starting movie search-->
+
+        <!-- section for popular movie suggestions-->
+        <div class="col-md-6">
+            <ul class="row nav nav-pills">
+                <span class="col-md-1"></span>
+                <li class="active col-md-4" ng-click="searchPopular()"><a href="#">Popular</a></li>
+                <li class="active col-md-3" ng-click="searchTopRated()"><a href="#">Top Rated</a></li>
+                <li class="active col-md-3" ng-click="searchNowPlaying()"><a href="#">Now Playing</a></li>
+                <span class="col-md-1"></span>
+            </ul>
+            <div class="row populars">
+                <h3>Popular Movies</h3>
+                <div ng-repeat="popular in populars">
+                    <h4><i class="fa fa-film"></i> {{popular.title}} ({{popular.year}}) - {{popular.rating}}/10 </h4>
+                </div>
+            </div>
+        </div> <!-- end of display for movie lists-->
+
+    </div> <!-- end of welcome section-->
+
+    <!-- "play" section -->
+    <div class="row">
+
+        <!-- search/display for next movie/actor-->
+        <div class="content col-md-6 text-center">
+            <h2>Your current link is:<br></h2>
+            <h3>{{links.movies[0].title}} ({{links.movies[0].year}})<br></h3>
+            <h2>now search for a movie/actor<br>for the next link:</h2><br>
+
+            <!-- search and select for next link-->
+            <div class="input-group">
+                <input type="text" ng-model="titleMovie" class="form-control" placeholder="Movie name or actor">
+                <span class="input-group-btn">
+                     <button class="btn btn-default" ng-click="searchTitle()" type="button">Search</button>
+                    </span>
+            </div>
+            <!-- render area for search results -->
+            <div ng-repeat="film in resultByTitle[0] | limitTo:5">
+                <h4><i class="fa fa-film"> </i> {{links.movies[0].title}} ({{links.movies[0].year}})</h4>
+            </div>
+
+        </div>
+
+        <div class="col-md-6 text-center">
+            <div ng-controller="chartCtrl">
+                <h2>Display for links:</h2>
+
+                <!--
+                    <chart-form></chart-form>
+                    <bar-chart height="500" data="data" hovered="hovered(args)"></bar-chart>
+                    -->
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- scripts for node modules, controller, service, app -->
+
+<script src="angular/angular.js"></script>
+<script src="js/app.js"></script>
+<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+<script src="js/directives/barChart.js"></script>
+<script src="js/directives/chartForm.js"></script>
+<script src="js/chart.js"></script>
+<script src="js/controllers/mainController.js"></script>
+<script src="js/controllers/chartController.js"></script>
+<script src="js/service/movies.js"></script>
+
+</body>
+
+</html>
