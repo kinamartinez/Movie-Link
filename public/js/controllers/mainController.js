@@ -1,41 +1,24 @@
-app.controller('mainController', function ($scope, service) {
+app.controller('mainController', function($scope, service) {
 
     //'import' functions from service
-    $scope.movies = service.movies;
-
-    $scope.populars = service.popularMovies;
-
-    $scope.searchPopular = service.searchPopular;
-
-    $scope.searchTitle = function () {
-        service.searchTitle($scope.titleMovie);
-    };
-
+    $scope.links = service.links;
+    $scope.addMovieLink = service.addMovieLink;
+    $scope.addActorLink = service.addActorLink;
+    $scope.searchTitle = service.searchTitle;
     $scope.resultByTitle = service.resultByTitle;
-
-    $scope.guesses = service.guesses;
-
-    $scope.addToGuess = service.addToGuess;
-
-    $scope.cast = service.cast;
-
     $scope.searchCast = service.searchCast;
-
-    $scope.people = service.people;
-
+    $scope.cast = service.cast;
+    $scope.credits = service.credits;
     $scope.searchPersonId = service.searchPersonId;
-
-    $scope.topRated = service.topRated;
-
+    $scope.searchPopular = service.searchPopular;
     $scope.searchTopRated = service.searchTopRated;
-
-    $scope.nowPlaying = service.nowPlaying;
-
     $scope.searchNowPlaying = service.searchNowPlaying;
-
-    $scope.actors = service.actors;
-
+    $scope.resultByActor = service.resultByActor;
     $scope.searchActor = service.searchActor;
+    $scope.displayRightList = service.displayRightList;
+
+    //Invoke get Popular movies to display when the page opens
+    $scope.searchPopular();
 
 
 });

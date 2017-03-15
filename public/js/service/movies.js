@@ -1,7 +1,7 @@
-app.service('service', function ($http) {
+app.service('service', function($http) {
 
-// search with actor's id to find their *credits*
-    var searchPersonId = function (personId) {
+    // search with actor's id to find their *credits*
+    var searchPersonId = function(personId) {
         console.log(personId);
         var api_key = "8827ea31eb495768c6d732582c199ecc";
         $http({
@@ -17,15 +17,15 @@ app.service('service', function ($http) {
         });
     };
 
-//  on actor selection, store their credits to check against next link movie input
+    //  on actor selection, store their credits to check against next link movie input
     var credits = [];
 
-// on movie selection store the movie's cast to check against next link actor input
+    // on movie selection store the movie's cast to check against next link actor input
     var cast = [];
 
-//after picking a movie from search, hold the cast information to check against
-//next link actor input
-    var searchCast = function (movieId) {
+    //after picking a movie from search, hold the cast information to check against
+    //next link actor input
+    var searchCast = function(movieId) {
         console.log(movieId);
         var api_key = "8827ea31eb495768c6d732582c199ecc";
         $http({
@@ -41,11 +41,11 @@ app.service('service', function ($http) {
 
     };
 
-//array for showing beginning movie lists
+    //array for showing beginning movie lists
     var displayRightList = [];
 
-//function for retrieving popular movies and making display list
-    var searchPopular = function () {
+    //function for retrieving popular movies and making display list
+    var searchPopular = function() {
         console.log("popular is working");
         var api_key = "8827ea31eb495768c6d732582c199ecc";
         $http({
@@ -54,15 +54,15 @@ app.service('service', function ($http) {
         }).then(function successCallback(response) {
 
             displayRightList = response.data.results;
-            console.log(popularMovies["0"]);
+
 
         }, function errorCallback(data) {
 
         });
     };
 
-//function for retrieving top rated movies and making display list
-    var searchTopRated = function () {
+    //function for retrieving top rated movies and making display list
+    var searchTopRated = function() {
         console.log("topRated is working");
         var api_key = "8827ea31eb495768c6d732582c199ecc";
         $http({
@@ -78,8 +78,8 @@ app.service('service', function ($http) {
         });
     };
 
-//function for retrieving current movies and making display list
-    var searchNowPlaying = function () {
+    //function for retrieving current movies and making display list
+    var searchNowPlaying = function() {
         console.log("NowPlaying is working");
         var api_key = "8827ea31eb495768c6d732582c199ecc";
         $http({
@@ -95,11 +95,11 @@ app.service('service', function ($http) {
         });
     };
 
-//array for holding movie search results
+    //array for holding movie search results
     var resultByTitle = [];
 
-//function for finding list of movie's based on user input search
-    var searchTitle = function (titleMovie) {
+    //function for finding list of movie's based on user input search
+    var searchTitle = function(titleMovie) {
         console.log(titleMovie);
         var api_key = "8827ea31eb495768c6d732582c199ecc";
         $http({
@@ -115,46 +115,43 @@ app.service('service', function ($http) {
         });
     };
 
-//object and array for shoing user's movie and actor links
+    //object and array for shoing user's movie and actor links
     var links = {
-        movies: [
-        {
-        title: "The Grinch",
-        year: 1990,
-        cast: ["Jim Carrey", "Mumford Mcson"],
-        rating: 10,
-        poster: "someurl"
-        },
-        {
-        title: "The Grinch 2",
-        year: 1990,
-        cast: ["Jim Carrey", "Mumford Mcson"],
-        rating: 10,
-        poster: "someurl"
-        }
-        ],
-        actors:[
-        "Elijah Wood", "Tom Hanks", "Bill Cosby"
+        movies: [{
+            title: "The Grinch",
+            year: 1990,
+            cast: ["Jim Carrey", "Mumford Mcson"],
+            rating: 10,
+            poster: "someurl"
+        }, {
+            title: "The Grinch 2",
+            year: 1990,
+            cast: ["Jim Carrey", "Mumford Mcson"],
+            rating: 10,
+            poster: "someurl"
+        }],
+        actors: [
+            "Elijah Wood", "Tom Hanks", "Bill Cosby"
         ]
     };
 
-//function for adding specific movie to links obj
-    var addMovieLink = function (movie) {
+    //function for adding specific movie to links obj
+    var addMovieLink = function(movie) {
         links.movies.push(movie);
     };
 
-//function for adding specific actor to links obj
-    var addActorLink = function (actor) {
+    //function for adding specific actor to links obj
+    var addActorLink = function(actor) {
         links.actors.push(actor);
     };
 
-//array for listing results of general actor search
+    //array for listing results of general actor search
     var resultByActor = [];
-    var searchActor = function (actorName) {
+    var searchActor = function(actorName) {
         var api_key = "8827ea31eb495768c6d732582c199ecc";
         $http({
             method: "GET",
-            url: "https://api.themoviedb.org/3/search/person?api_key="+ api_key +"&language=en-US&query="+actorName+"&page=1&include_adult=false"
+            url: "https://api.themoviedb.org/3/search/person?api_key=" + api_key + "&language=en-US&query=" + actorName + "&page=1&include_adult=false"
         }).then(function successCallback(response) {
 
             resultsByActor = response.data.results;
@@ -181,7 +178,7 @@ app.service('service', function ($http) {
         searchTopRated: searchTopRated,
         searchNowPlaying: searchNowPlaying,
         resultByActor: resultByActor,
-        searchActor:searchActor,
+        searchActor: searchActor,
         displayRightList: displayRightList
 
     };
