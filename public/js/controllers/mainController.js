@@ -22,6 +22,19 @@ app.controller('mainController', function($scope, service) {
         service.searchTitle($scope.titleMovie);
     };
 
+    //function for adding movie to links (from search or list)
+    $scope.addMovieLink = function (movie) {
+        var newMovie = {
+            title: movie.title,
+            year: movie.release_date,
+            id: movie.id,
+            rating: movie.vote_average,
+            img: "http://image.tmdb.org/t/p/w154"+movie.backdrop_path
+        };
+        console.log(newMovie);
+        service.addMovieLink(newMovie);
+    };
+
     //test function for ng-click
     $scope.test = function () {
         console.log(this);
