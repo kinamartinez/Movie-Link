@@ -84,15 +84,15 @@
 
             <!-- search and select for next link-->
             <div class="input-group">
-                <input type="text" ng-model="titleMovie" class="form-control" placeholder="Movie name or actor">
+                <input type="text" ng-model="actorName" class="form-control" placeholder="Movie name or actor">
                 <span class="input-group-btn">
-                     <button class="btn btn-default" ng-click="searchTitle()" type="button">Search</button>
+                     <button class="btn btn-default" ng-click="searchActor(actorName)" type="button">Search</button>
                     </span>
             </div>
             <!-- render area for search results -->
-            <div ng-repeat="film in resultByTitle[0] | limitTo:5">
-                <h4><i class="fa fa-film"> </i> {{links.movies[0].title}} ({{links.movies[0].year}})</h4>
-            </div>
+            <!--<div ng-repeat="film in resultByTitle[0] | limitTo:5">-->
+                <!--<h4><i class="fa fa-film"> </i> {{links.movies[0].title}} ({{links.movies[0].year}})</h4>-->
+            <!--</div>-->
 
         </div>
 
