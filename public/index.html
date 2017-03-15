@@ -33,7 +33,8 @@
             </div>
 
             <!-- render area for movie results-->
-            <div ng-repeat="film in resultByTitle | limitTo:5">
+            <div ng-repeat="film in resultByTitle | limitTo:5"
+            ng-click="searchCast(this.movie.id)">
                 <h4><i class="fa fa-film"> </i>  {{film.title}} ({{film.release_date | limitTo: 4}})</h4>
             </div>
 
@@ -82,9 +83,9 @@
         </div>
 
         <div class="col-md-6 text-center">
-            <div ng-controller="chartCtrl">
-                <h2>Display for links:</h2>
-
+            <h2>Display for links:</h2>
+            <div ng-repeat="movieLinks in links.movies">
+{{movieLinks.title}}({{movieLinks.year}})
                 <!--
                     <chart-form></chart-form>
                     <bar-chart height="500" data="data" hovered="hovered(args)"></bar-chart>
