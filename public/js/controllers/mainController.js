@@ -31,7 +31,7 @@ app.controller('mainController', function($scope, service) {
             img: "http://image.tmdb.org/t/p/w154" + movie.backdrop_path
         };
         service.addMovieLink(newMovie);
-        service.links.ids.push(id);
+        service.links.ids.push(movie.id);
     };
 
     //when user chooses the actor after searching for them
@@ -44,7 +44,7 @@ app.controller('mainController', function($scope, service) {
             img: "http://image.tmdb.org/t/p/w154" + actor.profile_path
         };
         service.addActorLink(newActor);
-        service.links.ids.push(id);
+        service.links.ids.push(actor.id);
     };
 
     //function for: check the actor selected against cast of previous link
