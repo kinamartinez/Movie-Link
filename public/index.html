@@ -35,7 +35,7 @@
             </div>
 
             <!-- render area for movie results-->
-            <div class="spaceBtw">
+            <div class="spaceBtw"> <!--this div is to add padding between the circles and the input-->
                 <div ng-repeat="film in resultByTitle | limitTo:5"
                      ng-click="searchCast(this.film.id); addMovieLink(this.film); playing(); clearMovieInput();"
                      class="circle">
@@ -86,7 +86,7 @@
                     </span>
                 </div>
                 <!-- display searches -->
-                <div class="spaceBtw">
+                <div class="spaceBtw"><!--this div is to add padding between the circles and the input-->
                     <div ng-repeat="actor in resultByActor | limitTo:5"
                          ng-click="checkActor(this.actor); clearActorInput();" class="circle">
                         <h5 class="space"><i class="fa fa-user fa-1x"> </i> {{actor.name}}</h5>
@@ -107,9 +107,12 @@
                     <button class="btn btn-default" ng-click="searchTitle(titleMovie)" type="button">Search</button>
                     </span>
                 </div>
-                <div ng-repeat="film in resultByTitle | limitTo:5">
-                    <h4 ng-click="checkMovie(this.film); clearMovieInput()"><i class="fa fa-film"> </i> {{film.title}}
+                <div class="spaceBtw"><!--this div is to add padding between the circles and the input-->
+                <div ng-repeat="film in resultByTitle | limitTo:5"
+                     ng-click="checkMovie(this.film); clearMovieInput()" class="circle">
+                    <h4><i class="fa fa-film"></i> {{film.title}}
                         ({{film.release_date | limitTo: 4}})</h4>
+                </div>
                 </div>
             </div>
 
