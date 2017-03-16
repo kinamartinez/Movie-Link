@@ -35,12 +35,13 @@
             </div>
 
             <!-- render area for movie results-->
+            <div class="spaceBtw">
             <div ng-repeat="film in resultByTitle | limitTo:5"
                  ng-click="searchCast(this.film.id); addMovieLink(this.film); playing(); clearMovieInput();" class="circle">
 
-                <h5><i class="fa fa-film fa-1x"> </i> {{film.title}} ({{film.release_date | limitTo: 4}})</h5>
+                <h5><i class="fa fa-film fa-1x"> </i> {{film.title}}({{film.release_date | limitTo: 4}})</h5>
             </div>
-
+            </div>
         </div> <!-- end div for starting movie search-->
 
         <!-- section for popular movie suggestions-->
@@ -58,7 +59,7 @@
                     <h4 ng-click="searchCast(this.movie.id); addMovieLink(this.movie); playing();"><i class="fa fa-film"></i> {{movie.title}}({{movie.release_date | limitTo: 4}})</h4>
                 </div>
             </div>
-           <button class="btn btn-default" ng-click="playing()" type="button">playing test</button>
+        
         </div> <!-- end of display for movie lists-->
 
     </div> <!-- end of welcome section-->
@@ -82,8 +83,11 @@
                     </span>
                 </div>
             <!-- display searches -->
-                <div ng-repeat="actor in resultByActor | limitTo:5">
-                    <h4 ng-click="checkActor(this.actor); clearActorInput();"><i class="fa fa-user"> </i>   {{actor.name}}</h4>
+                <div class="spaceBtw">
+                <div ng-repeat="actor in resultByActor | limitTo:5"
+                     ng-click="checkActor(this.actor); clearActorInput();" class="circle">
+                    <h5 class="space"><i class="fa fa-user fa-1x"> </i> {{actor.name}}</h5>
+                </div>
                 </div>
             </div>
 
@@ -104,9 +108,9 @@
                 </div>
             </div>
 
-            <!-- test button for toggling actor/movie-->
-            <button class="btn btn-default" ng-click="toggleMovieActor()" type="button">toggle test</button>
-        </div>
+            <!--&lt;!&ndash; test button for toggling actor/movie&ndash;&gt;-->
+            <!--<button class="btn btn-default" ng-click="toggleMovieActor()" type="button">toggle test</button>-->
+        <!--</div>-->
 
 
 
