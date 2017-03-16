@@ -30,7 +30,6 @@ app.controller('mainController', function($scope, service) {
             rating: movie.vote_average,
             img: "http://image.tmdb.org/t/p/w154"+movie.backdrop_path
         };
-        console.log(newMovie);
         service.addMovieLink(newMovie);
     };
 
@@ -43,7 +42,6 @@ app.controller('mainController', function($scope, service) {
             id: actor.id,
             img: "http://image.tmdb.org/t/p/w154"+actor.profile_path
         };
-        console.log(newActor);
         service.addActorLink(newActor)
     };
 
@@ -54,23 +52,43 @@ app.controller('mainController', function($scope, service) {
 //add their information to links
 //then toggle to have user look for next movie link
     $scope.checkActor = function (actor) {
+        console.log($scope.links.actors.indexOf({id: actor.id}));
         if($scope.cast.indexOf(actor.id) == -1){
             console.log("the actor isn't in the cast");
-        }
-        if ($scope.links.actors.indexOf(actor.id) != -1) {
+            return false;
+        } else if ($scope.links.actors.indexOf(actor.id) != -1) {
             console.log("you already picked this actor");
-        }
+            return false;
+        } else {
         service.searchPersonId(actor.id);
         $scope.addActorLink(actor);
         $scope.toggleMovieActor();
+        }
+    };
+
+//function that checks movie selected against movie links/credits
+//ON SUCCESS:
+//retrieve the cast to check against next actor select
+//add movie with info to links
+//then toggle to have user look for next actor link
+    $scope.checkMovie = function (movie) {
+        if($scope.credits.indexOf(movie.id) == -1){
+            console.log("the actor isn't in that movie");
+            return false;
+        } else if ($scope.links.movies.indexOf(movie.id) != -1) {
+            console.log("you already picked this movie");
+            return false;
+        } else {
+        service.searchCast(movie.id);
+        $scope.addMovieLink(movie);
+        $scope.toggleMovieActor();
+        }
     };
 
     //test function for ng-click
     $scope.test = function () {
         console.log(this);
-    };
-
-    
+    }; 
 
     //Variables to show/hide the pages
     $scope.play = false;
@@ -78,6 +96,7 @@ app.controller('mainController', function($scope, service) {
     $scope.playing = function() {
         $scope.play = true;
     };
+
     //vars to toggle actor/movie search
     $scope.nextActor = true;
 
