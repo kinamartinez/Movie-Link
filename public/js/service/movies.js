@@ -2,7 +2,7 @@ app.service('service', function($http) {
 
     //function for finding list of movie's based on user input search
     var searchTitle = function(titleMovie) {
-        console.log("you are searching for: "+titleMovie);
+        console.log("you are searching for: " + titleMovie);
         var api_key = "8827ea31eb495768c6d732582c199ecc";
         $http({
             method: "GET",
@@ -17,8 +17,8 @@ app.service('service', function($http) {
     //array for holding movie search results
     var resultByTitle = [];
 
-//after picking a movie from search, hold the cast information to check against
-//next link actor input
+    //after picking a movie from search, hold the cast information to check against
+    //next link actor input
     var searchCast = function(movieId) {
         console.log(movieId);
         var api_key = "8827ea31eb495768c6d732582c199ecc";
@@ -27,12 +27,12 @@ app.service('service', function($http) {
             url: "https://api.themoviedb.org/3/movie/" + movieId + "/credits?api_key=" + api_key
         }).then(function successCallback(response) {
             var castIds = [];
-            for(i=0;i<response.data.cast.length;i++){
+            for (i = 0; i < response.data.cast.length; i++) {
                 castIds.push(response.data.cast[i].id);
             };
-            console.log("the cast for "+movieId+" is: "+castIds);
+            console.log("the cast for " + movieId + " is: " + castIds);
             angular.copy(castIds, cast);
-            
+
         }, function errorCallback(data) {
             console.log(data.data);
         });
@@ -44,7 +44,7 @@ app.service('service', function($http) {
 
     //function for retrieving results of user input to find actor
     var searchActor = function(actorName) {
-        console.log("you are looking for: "+actorName);
+        console.log("you are looking for: " + actorName);
         var api_key = "8827ea31eb495768c6d732582c199ecc";
         $http({
             method: "GET",
@@ -67,10 +67,10 @@ app.service('service', function($http) {
             url: "https://api.themoviedb.org/3/person/" + personId + "/movie_credits?api_key=" + api_key
         }).then(function successCallback(response) {
             var creditIds = []
-            for(i=0;i<response.data.cast.length;i++){
+            for (i = 0; i < response.data.cast.length; i++) {
                 creditIds.push(response.data.cast[i].id);
             };
-            console.log("these are "+personId+"'s credits:"+creditIds)
+            console.log("these are " + personId + "'s credits:" + creditIds)
             angular.copy(creditIds, credits);
 
         }, function errorCallback(data) {
@@ -130,20 +130,22 @@ app.service('service', function($http) {
     //object and array for showing user's movie and actor links/selections
     var links = {
         movies: [],
-        actors: []
+        actors: [],
+        ids: []
     };
 
     //function for adding specific movie to links obj
     var addMovieLink = function(movie) {
         links.movies.push(movie);
-        console.log("you added "+movie.title+" to your links");
+        console.log("you added " + movie.title + " to your links");
     };
 
     //function for adding specific actor to links obj
     var addActorLink = function(actor) {
         links.actors.push(actor);
-        console.log("you added "+actor.name+" to your links")
+        console.log("you added " + actor.name + " to your links")
     };
+
 
 
 
