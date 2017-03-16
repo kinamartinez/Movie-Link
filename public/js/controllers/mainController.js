@@ -32,6 +32,9 @@ app.controller('mainController', function($scope, service) {
         };
         service.addMovieLink(newMovie);
         service.links.ids.push(movie.id);
+
+
+
     };
 
     //when user chooses the actor after searching for them
@@ -58,7 +61,7 @@ app.controller('mainController', function($scope, service) {
         if ($scope.cast.indexOf(actor.id) == -1) {
             console.log("the actor isn't in the cast");
             return false;
-        } else if ($scope.links.actors.indexOf(actor.id) != -1) {
+        } else if ($scope.links.ids.indexOf(actor.id) != -1) {
             console.log("you already picked this actor");
             return false;
         } else {
@@ -77,7 +80,7 @@ app.controller('mainController', function($scope, service) {
         if ($scope.credits.indexOf(movie.id) == -1) {
             console.log("the actor isn't in that movie");
             return false;
-        } else if ($scope.links.movies.indexOf(movie.id) != -1) {
+        } else if ($scope.links.ids.indexOf(movie.id) != -1) {
             console.log("you already picked this movie");
             return false;
         } else {
@@ -109,15 +112,6 @@ app.controller('mainController', function($scope, service) {
         $scope.nextMovie = !$scope.nextMovie;
     };
 
-    $scope.clearMovieInput = function() {
-        $scope.movieTitle = "";
-        $scope.resultByTitle = [];
-    };
-
-    $scope.clearActorInput = function() {
-        $scope.actorName = "";
-        $scope.resultByActor = [];
-    };
 
     //Invoke get Popular movies to display when the page opens
     $scope.searchPopular();
