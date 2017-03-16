@@ -35,7 +35,7 @@
             </div>
 
             <!-- render area for movie results-->
-            <div class="spaceBtw">
+            <div class="spaceBtw"> <!--this div is to add padding between the circles and the input-->
                 <div ng-repeat="film in resultByTitle | limitTo:5"
                      ng-click="searchCast(this.film.id); addMovieLink(this.film); playing(); clearMovieInput();"
                      class="circle">
@@ -66,14 +66,14 @@
 
     </div> <!-- end of welcome section-->
 
-    <!-- "play" section -->
-    <div class="row area" ng-show="play">
+    <!-- "play" section **ng-show="play"-->
+    <div class="row area" >
 
         <!-- search/display for next actor-->
         <div class="content col-md-6 text-center">
 
-            <!-- show for actor search -->
-            <div ng-show="nextActor">
+            <!-- show for actor search *** ng-show="nextActor"-->
+            <div >
                 <h2>Your current link is:<br></h2>
                 <h4>{{links.movies[links.movies.length-1].title}} ({{links.movies[links.movies.length-1].year | limitTo:
                     4}})<br></h4>
@@ -86,7 +86,7 @@
                     </span>
                 </div>
                 <!-- display searches -->
-                <div class="spaceBtw">
+                <div class="spaceBtw"><!--this div is to add padding between the circles and the input-->
                     <div ng-repeat="actor in resultByActor | limitTo:5"
                          ng-click="checkActor(this.actor); clearActorInput();" class="circle">
                         <h5 class="space"><i class="fa fa-user fa-1x"> </i> {{actor.name}}</h5>
@@ -95,8 +95,8 @@
 
             </div>
 
-            <!-- this will show if the user now need to guess movie-->
-            <div ng-show="nextMovie">
+            <!-- this will show if the user now need to guess movie****ng-show="nextMovie"-->
+            <div>
                 <h2>Your current link is:<br></h2>
                 <h4>{{links.actors[links.actors.length-1].name}} <br></h4>
                 <h2>now search for another credit<br>for the next link:</h2><br>
@@ -107,9 +107,12 @@
                     <button class="btn btn-default" ng-click="searchTitle(titleMovie)" type="button">Search</button>
                     </span>
                 </div>
-                <div ng-repeat="film in resultByTitle | limitTo:5">
-                    <h4 ng-click="checkMovie(this.film); clearMovieInput()"><i class="fa fa-film"> </i> {{film.title}}
-                        ({{film.release_date | limitTo: 4}})</h4>
+                <div class="spaceBtw"><!--this div is to add padding between the circles and the input-->
+                <div ng-repeat="film in resultByTitle | limitTo:5"
+                     ng-click="checkMovie(this.film); clearMovieInput()" class="circle">
+                    <h5><i class="fa fa-film"></i> {{film.title}}
+                        ({{film.release_date | limitTo: 4}})</h5>
+                </div>
                 </div>
             </div>
 
@@ -119,13 +122,15 @@
 
         <div class="col-md-6 text-center">
             <h2>Display for links:</h2>
+            <div class="paddingLeft">
             <div class="content col-md-12 text-center">
                 <div ng-repeat="item in links.movies" class="content col-md-6">
-                    <p>{{item.title}}</p>
+                    <h5 class="circle">{{item.title}}</h5>
                 </div>
                 <div ng-repeat="itemActors in links.actors" class="content col-md-6">
-                    <p>{{itemActors.name}}</p>
+                    <h5 class="circle">{{itemActors.name}}</h5>
                 </div>
+            </div>
             </div>
         </div>
     </div>
