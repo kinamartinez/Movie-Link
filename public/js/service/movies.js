@@ -32,7 +32,8 @@ app.service('service', function($http) {
             };
             console.log("the cast for " + movieId + " is: " + castIds);
             angular.copy(castIds, cast);
-
+            this.titleMovie = "";
+            this.resultByTitle = [];
         }, function errorCallback(data) {
             console.log(data.data);
         });
@@ -72,7 +73,8 @@ app.service('service', function($http) {
             };
             console.log("these are " + personId + "'s credits:" + creditIds)
             angular.copy(creditIds, credits);
-
+            this.actorName = "";
+            this.resultByActor = [];
         }, function errorCallback(data) {
             console.log(data.data);
         });
