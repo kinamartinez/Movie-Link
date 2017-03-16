@@ -35,8 +35,10 @@
             </div>
 
             <!-- render area for movie results-->
-            <div ng-repeat="film in resultByTitle | limitTo:5">
-                <h4 ng-click="searchCast(this.film.id); addMovieLink(this.film); playing(); clearMovieInput();"><i class="fa fa-film"> </i>  {{film.title}} ({{film.release_date | limitTo: 4}})</h4>
+            <div ng-repeat="film in resultByTitle | limitTo:5"
+                 ng-click="searchCast(this.film.id); addMovieLink(this.film); playing(); clearMovieInput();" class="circle">
+
+                <h5><i class="fa fa-film fa-1x"> </i> {{film.title}} ({{film.release_date | limitTo: 4}})</h5>
             </div>
 
         </div> <!-- end div for starting movie search-->
@@ -81,7 +83,7 @@
                 </div>
             <!-- display searches -->
                 <div ng-repeat="actor in resultByActor | limitTo:5">
-                    <h4 ng-click="searchPersonId(this.actor.id); addActorLink(this.actor); toggleMovieActor(); clearActorInput();"><i class="fa fa-user"> </i>   {{actor.name}}</h4>
+                    <h4 ng-click="checkActor(this.actor); clearActorInput();"><i class="fa fa-user"> </i>   {{actor.name}}</h4>
                 </div>
             </div>
 
@@ -98,7 +100,7 @@
                     </span>
                 </div>
                 <div ng-repeat="film in resultByTitle | limitTo:5">
-                    <h4 ng-click="searchCast(this.film.id); addMovieLink(this.film); toggleMovieActor(); clearMovieInput()"><i class="fa fa-film"> </i>  {{film.title}} ({{film.release_date | limitTo: 4}})</h4>
+                    <h4 ng-click="checkMovie(this.film); clearMovieInput()"><i class="fa fa-film"> </i>  {{film.title}} ({{film.release_date | limitTo: 4}})</h4>
                 </div>
             </div>
 
