@@ -21,7 +21,6 @@ app.controller('mainController', function($scope, service) {
         service.searchTitle($scope.titleMovie);
     };
 
-
     //function for adding movie to links (from search or list)
     $scope.addMovieLink = function (movie) {
         var newMovie = {
@@ -35,6 +34,8 @@ app.controller('mainController', function($scope, service) {
         service.addMovieLink(newMovie);
     };
 
+//when user chooses the actor after searching for them
+//add the movie's information to links array
     $scope.addActorLink = function (actor) {
 
         newActor = {
@@ -46,14 +47,30 @@ app.controller('mainController', function($scope, service) {
         service.addActorLink(newActor)
     };
 
+//function for: check the actor selected against cast of previous link
+//and actor links (previously selected actors)
+//ON SUCCESS:
+//retrieve their credits to check against next movie select
+//add their information to links
+//then toggle to have user look for next movie link
+    $scope.checkActor = function (actor) {
+        if($scope.cast.indexOf(actor.id) == -1){
+            console.log("the actor isn't in the cast");
+        }
+        if ($scope.links.actors.indexOf(actor.id) != -1) {
+            console.log("you already picked this actor");
+        }
+        service.searchPersonId(actor.id);
+        $scope.addActorLink(actor);
+        $scope.toggleMovieActor();
+    };
+
     //test function for ng-click
     $scope.test = function () {
         console.log(this);
-
     };
 
-    //Invoke get Popular movies to display when the page opens
-    $scope.searchPopular();
+    
 
     //Variables to show/hide the pages
     $scope.play = false;
@@ -79,6 +96,9 @@ app.controller('mainController', function($scope, service) {
     $scope.clearActorInput = function () {
         $scope.actorName = "";
         $scope.resultByActor = [];
-    }
+    };
+
+    //Invoke get Popular movies to display when the page opens
+    $scope.searchPopular();
 
 });
