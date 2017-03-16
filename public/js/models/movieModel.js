@@ -1,17 +1,14 @@
-/*var mongoose = require('mongoose');
-
+var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var movieSchema = new Schema ({
-	name: String,
-	abv: Number,
-    style: String,
-    image: String,
-    rating: [Number],
-    avgRating: Number
-}, {versionKey: false});
+//Movie Model
+var movieSchema = new Schema({
+    name: String,
+    id: Number,
+    year: Number,
+    image: String
+});
+var Movie = mongoose.model('Movie', movieSchema);
 
-var Beer = mongoose.model('Beer', beerSchema);
 
-module.exports = Beer;
-*/
+module.exports = Movie;
