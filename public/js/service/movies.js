@@ -28,8 +28,13 @@ app.service('service', function($http) {
             method: "GET",
             url: "https://api.themoviedb.org/3/movie/" + movieId + "/credits?api_key=" + api_key
         }).then(function successCallback(response) {
-            angular.copy(response.data.cast, cast);
-            console.log(cast);
+            var castIds = [];
+            for(i=0;i<response.data.cast.length;i++){
+                castIds.push(response.data.cast[i].id);
+            };
+            console.log(castIds);
+            angular.copy(castIds, cast);
+            
         }, function errorCallback(data) {
             console.log(data.data);
         });
